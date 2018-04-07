@@ -6,8 +6,8 @@
 int16_t usr_calc(int16_t val, char* mem) {
     //flattern every pattern of tetrominoes
     //block[0]=0x1596; block[1]=0x4596; block[2]=0x526A; block[3]=0x4156;
-    int16_t* bp = (int16_t*)mem;
-    int16_t block = bp[0x800+val];
+    int16_t* bp = (int16_t*)&mem[0x800+val];
+    int16_t block = *bp;
 
     int x = 10;
     int y = 10;
