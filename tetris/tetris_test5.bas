@@ -7,4 +7,18 @@
 310 WAIT15:CLS:NEXT:NEXT
 320 GOTO 200
 
-'ブロックパターンを配列に置いて、それをマシン語側から読み出してVRAM更新するバージョンの習作
+ブロックパターンを配列に置いて、それをマシン語側から読み出してVRAM更新するバージョンの習作
+マシン語部分は、 https://github.com/inuro/IchigoJam_bin2poke/tree/base16 を用いて、
+
+$ arm-none-eabi-gcc -c -mthumb -mcpu=cortex-m0 -mlittle-endian -mno-unaligned-access -Os -g -o tetris_test5.o -c tetris_test5.c
+$ arm-none-eabi-ld -T bin2poke.ld -o tetris_test5.elf tetris_test5.o -Map linkmap.map
+$ arm-none-eabi-objcopy -O binary tetris_test5.elf tetris_test5.bin
+$ python bin2poke.py -b -c 96 -a 0x800 -s 1 -d 1 tetris_test5.bin tetris_test5.bas
+$ cat tetris_test5.bas
+
+として得た。
+
+
+
+
+
