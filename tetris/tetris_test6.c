@@ -1,7 +1,10 @@
 #include <stdint.h>
 
 //  [0]-[27]: block patterns
-//  block[0]=0x1596; block[1]=0x4596; block[2]=0x526A; block[3]=0x4156; ...
+//  LET[0],#1596,#4596,#526A,#4156,#159A,#4856,#126A,#4526,#1592,#456A,#926A,#456,#156A,#8596,#156A,#8596,#5926,#156,#5926,#156,#159D,#89AB,#159D,#89AB,#596A,#596A,#596A,#596A
+
+
+
 //  X:  x position of left of block area(4x4)
 //  Y:  y position of top of block area(4x4)
 //  B:  block type (0~6)
