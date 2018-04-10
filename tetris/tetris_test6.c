@@ -1,35 +1,36 @@
-/**
-  both show&hide
-  
-  val should be: 00tttrrd
-    d:  display or erase flag.1=display 0=erase
-    t:  tetromino_type. 0~6
-    r:  tetromino rotate. 0~3
-    val = t<<3 + r<<1 + d
-*/
-
-
 #include <stdint.h>
 
-//store patterns on BASIC array( [0]- 
+//  [0]-[27]: block patterns
+//  block[0]=0x1596; block[1]=0x4596; block[2]=0x526A; block[3]=0x4156; ...
+//  X:  x position of left of block area(4x4)
+//  Y:  y position of top of block area(4x4)
+//  B:  block type (0~6)
+//  R:  rotation (0~3, counter-clockwise)
 
 #define VRAM_OFFSET   0x900 //VRAM offset
-#define VARS_OFFSET   0x800 //Variables offset
+#define ARRAY_OFFSET   0x800 //ARRAY offset
+//vals offsets
+#define B_OFFSET  0x8ce
+#define R_OFFSET  0x8ee
+#define X_OFFSET  0x8fa
+#define Y_OFFSET  0x8fc
 
-//val must be: tetromino_type<<2 + rotate_pattern
+//  val:  charactor code to be displayed. 0 means clean up
 uint16_t usr_calc(uint16_t val, uint8_t* mem) {
-    //flattern every pattern of tetrominoes
-    //block[0]=0x1596; block[1]=0x4596; block[2]=0x526A; block[3]=0x4156;
     uint8_t* vram_addr = mem + VRAM_OFFSET;
-    uint16_t* block_addr = mem + VARS_OFFSET;
-    int16_t block = *(block_addr + val>>1);
+    uint16_t* block_addr = mem + ARRAY_OFFSET;
 
-    int x = 10;
-    int y = 10;
+    int x = *(mem + X_OFFSET);
+    int y = *(mem + Y_OFFSET);
+    int b = *(mem + B_OFFSET);//block_type
+    int r = *(mem + R_OFFSET);//rotation
+    int block_offset = b * 4 + r;
+    int block = *(block_addr + block_offset);
+  
     for(int i=0; i<4; i++){
         int b = (block >> (i*4)) & 3;
         int a = (block >> (i*4+2)) & 3;
-        *(vram_addr + (x + a) + (y + b) * 32) = 248;
+        *(vram_addr + (x + a) + (y + b) * 32) = val;
     }
-    return block;
+    return block_offset;
 }
