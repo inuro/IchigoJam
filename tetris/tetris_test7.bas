@@ -5,11 +5,21 @@
 200 CLS:T=60:CLT
 210 X=14:Y=0:B=RND(7):R=0:U=1
 220 IFTICK()>T CLT:V=1:GOTO@C
-230 H=BTN(29)-BTN(28):V=BTN(31):S=BTN(32):LC0,0:?H,V,S
-240 @C:IF H|V|S^U W=0:GSB@D:R=(R+S)%4:X=X+H:Y=Y+V:W=248:GSB@D:U=S
-300 IFY=18 GOTO210 ELSE GOTO220
+230 H=BTN(29)-BTN(28):V=BTN(31):S=BTN(32)
+240 @C:IF H|V|S^U W=-1:GSB@D
+250 IF Z=0 W=0:GSB@D:R=(R+S)%4:X=X+H:Y=Y+V:W=248:GSB@D:U=S:GOTO220
+ELSE IF V W=255:GSB@D:U=S:GOTO210
+ELSE GOTO220
 400 @D:Z=USR(#700,W):RTN
 
+  
+  
+  250 衝突フラグZ=0、つまり衝突していない場合、現在のブロックを消して、回転あるいは移動先のブロックを描画し、ループへ戻る
+  Z>0、つまり衝突している場合、
+    それがもし下方向（V>0）なら現在のブロックを壁の色に書き換える。（ライン消し判定、ライン移動、スコア加算）新規ブロックへ
+    もしそれ以外なら、動けないので何もせずループへ戻る
+  
+  
 
 衝突チェックロジックの組み込み
 
