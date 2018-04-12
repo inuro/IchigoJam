@@ -5,7 +5,7 @@
 30 B=A>>(7-S):
 40 V=B|C
 50 C=(A&(#7F>>S))<<(S+1)
-55 IF S POKE R+K*2,V&#FF,V>>4:K=K+1
+55 IF S POKE#800+K*2,V&#FF,V>>4:K=K+1
 60 I=I+1:
 70 IF I<11 goto@LOOP
 80 FOR I=0 TO 8:?CHR$([I]);:NEXT
