@@ -1,9 +1,9 @@
 1 'ｳyｴﾕcﾍvﾇYZﾄﾆjﾅﾖSKｵｴbcﾍ\ﾛｱｹﾂｷｹJｯFmyｴﾙaｽｴﾇ9=ﾍVhzﾞgｵﾂgﾓm^BﾛeNﾍWｻYﾖﾊ
 2 'ﾛﾍSdｸﾍEｫ^Rｫp4ｬdｫﾅｷ0IHﾉGｫ^Vﾀ9ｸﾂ2R]p2P>\aK<7a0186S:0Cta\0ﾆS4ﾈCJ03NｫwCaｬpｬｻ0ｭpIｸﾄｼ0O@Vﾐ3I<gP0CﾋﾘﾇfIﾅv3ﾗsﾘmgPｯ8`1P1ｻ<L0s@pｵﾁﾈxF_ﾕﾗ0vﾝ2007h@00o1003L8000
 3 O=#C04:I=0:D=#810
-4 S=I%8:A=PEEK(O+I):A=A-(1+(A>#AA))*#30:IFSV=A>>(7-S)|C:POKED,V:D=D+1:IFD=#848O=#C4A:I=0:GOTO4
+4 S=I%8:[S]=S:A=PEEK(O+I):A=A-(1+(A>#AA))*#30:IFSV=A>>(7-S)|C:POKED,V:D=D+1:IFD=#848O=#C4A:I=0:GOTO4
 5 C=(A&(#7F>>S))<<(S+1):I=I+1:IFD<#8C8GOTO4
-6 T=60:CLS:FORI=0TO21:LC9,I:?"Ə":LC20,I:?"Ə":NEXT:COPY#BAA,#BA9,10
+6 T=60:U=0:CLS:FORI=0TO21:LC9,I:?"Ə":LC20,I:?"Ə":NEXT:COPY#BAA,#BA9,10
 7 X=14:Y=0:B=RND(7):R=0:IFSCR(15,2)END
 8 W=248:GSB13
 9 H=0:S=0:IFBTN(31)||TICK()>TCLT:V=1:ELSEV=0:H=BTN(29)-BTN(28):S=BTN(32):IFH|S^U=0CONT
@@ -16,7 +16,7 @@
 
 '
 1行目はブロックパターンをBASE128エンコードしたもの。block_pattern.binから生成
-2行目はマシン語描画コード。tetris_test7.cをmakeしたもの
+2行目はマシン語描画コード。tetris_core.cをmakeしたもの
 マシン語圧縮コードが2行に渡るため、3〜5のデコード＆書き込み部分は少しトリッキーになっている。
 ブロックパターン分の56バイトを書き終えたら（IF D = #838 = #800+56)読み込み元のオフセット#C04を次の行の#CA4に移している。
 #CA4の値はPEEK(#C02)して得られる1行目の文字数66バイトに、行番号2バイト、スペース、コメント記号（'）の4バイト、合わせて70バイトを足したもの。（#C04+70 = #C4A)
