@@ -1,10 +1,10 @@
 1 'ﾛﾍaﾒ@x3:<TﾏP4ｬVﾛ0ﾄﾒgxｱﾕK06ﾃEｸ3pjﾊｶp2@<vD0W8ﾂｸ1ｬv9ｰVd06mG>VﾃI1If1K0cayh0nPｭﾀ6bHﾎp0Wｷﾑｮﾌcｫ<7ﾏ7ﾐﾚﾎqN@ﾀ2p3fHh16Q1[sｱ@\ｿﾋﾎ1<
 2 'ｳyｴﾕcﾍvﾇYZﾄﾆjﾅﾖSKｵｴbcﾍ\ﾛｱｹﾂｷｹJｯFmyｴﾙaｽｴﾇ9=ﾍVhzﾞgｵﾂgﾓm^BﾛeNﾍWｻYﾖﾊqQﾐXｼZ72vﾂ@ﾘﾄbE5
-3 O=#C04:I=0:D=#700
+3 CLV:O=#C04:D=#700
 4 S=I%8:[S]=S:A=PEEK(O+I):A=A-(1+(A>#AA))*#30:IFSV=A>>(7-S)|C:POKED,V:D=D+1:IFD=#768O=#C80:D=#810:I=0:GOTO4
 5 C=(A&(#7F>>S))<<(S+1):I=I+1:IFD<#856GOTO4
-6 T=54:N=0:U=0:R=0:GSB90:CLS:FORI=0TO21:LC9,I:?"Ə":LC20,I:?"Ə":NEXT:COPY#BAA,#BA9,10
-7 X=14:Y=0:V=[R]:W=0:IFSCR(15,2)ENDELSER=(R+1)%7:IF!RGSB90
+6 T=54:GSB90:CLS:FORI=0TO21:LC9,I:?"Ə":LC20,I:?"Ə":NEXT:COPY#BAA,#BA9,10
+7 X=14:Y=0:V=[R]:IFSCR(15,2)ENDELSER=(R+1)%7:IF!RGSB90
 8 LC6,23:J=[R]:I=[36+J]:?"NEXT:";CHR$(I);CHR$(I>>8),"SCORE:";N;
 9 C=248:GSB80
 10 A=0:S=0:IFBTN(31)||TICK()>T+6CLT:B=1:ELSEB=0:A=BTN(29)-BTN(28):S=BTN(32):IFA|S^U=0CONT
@@ -19,6 +19,7 @@
 '変数を再編し、ブロック位置関連はVWXYと並びに変更
 'マシン語ロジック側のASM部分を最適化し、24バイト削減
 'スコア追加
+'各種変数のうち、0で初期化してるものはCLVに任せてサイズ削減
 
 'マシン語書き込み部分
 1行目はブロックパターン（実表示用とテキスト表示用）をBASE128エンコードしたもの。tetris_data.binから生成
