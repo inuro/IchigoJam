@@ -13,3 +13,5 @@
 'shuffle subrootine
 'based on Sattolo's algorithm
 'https://ja.wikipedia.org/wiki/フィッシャー–イェーツのシャッフル
+
+'FORI=6TO0STEP-1:J=RND(I):K=[I]:[I]=[J]:[J]=K:NEXT:RTN
