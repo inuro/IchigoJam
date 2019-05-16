@@ -3,11 +3,11 @@
 3 CLV:O=#C04:D=#700
 4 S=I%8:[S]=S:A=PEEK(O+I):A=A-(1+(A>#AA))*#30:IFSV=A>>(7-S)|C:POKED,V:D=D+1:IFD=#768O=#C80:D=#810:I=0:GOTO4
 5 C=(A&(#7F>>S))<<(S+1):I=I+1:IFD<#856GOTO4
-6 T=20:GSB90:CLS:FORI=0TO21:LC9,I:?"T":LC20,I:?"T":NEXT:COPY#BAA,#BA9,10
+6 T=20:GSB90:CLS:FORI=0TO21:POKE#909+I*32,1:POKE#914+I*32,1:NEXT:COPY#BAA,#BA9,10
 7 X=14:Y=0:V=[R]:IFSCR(15,2)ENDELSER=(R+1)%7:IF!RGSB90
 8 LC6,23:J=[R]:I=[36+J]:?"NEXT:";CHR$(I);CHR$(I>>8),"SCORE:";N;
 9 C=248:GSB80:IFAWAIT3
-10 A=0:S=0:IF!IN(1)||TICK()>T+3CLT:B=1:ELSEB=0:A=IN(4)-IN(3):S=BTN():IFA|S^U=0CONT
+10 A=0:S=0:IF!IN(4)||TICK()>T+3CLT:B=1:ELSEB=0:A=IN(3)-IN(1):S=BTN():IFA|S^U=0CONT
 11 U=S:C=0:GSB80:I=W:X=X+A:Y=Y+B:W=(W+S)%4:C=-1:GSB80:IF!ZGOTO9
 12 X=X-A:Y=Y-B:W=I:IF!BGOTO9
 13 C=2:GSB80:FORJ=YTOY+3:L=0:FORI=10TO19:L=L+!!SCR(I,J):NEXT:M=L=10:COPY#91F+J*32,#91F+(J-M)*32,-J*32:U=U+M:NEXT:N=N+10*U*U*U+1:T=T-1*(T*U>0):GOTO7
@@ -17,6 +17,12 @@
 
 'QRcode転送対応（機種依存文字レス版）
 'ジョイスティックバージョン
+'      IN(2)
+' 　　　　↑
+' IN(3)←　→IN(1)
+' 　　　　↓
+'      IN(4)
+
 
 'マシン語書き込み部分
 1行目はマシン語描画コード。tetris_core_mod.sをmakeしたもの
@@ -32,7 +38,7 @@
 1 コアエンジンのマシン語のBASE128エンコード文字列。104バイト分。
 2 ブロックパターンのBASE128エンコード文字列。70バイト分。
 3-5　デコード＆メモリ書き込み。ついでに[0]-[7]も初期化
-6 ゲーム初期化、フィールドの描画
+6 ゲーム初期化、フィールドの描画。POKE#909,1 = LC9,0:?"■"
 7 新規ブロックの生成と終了判定（15,2に何か描かれているか否か）、乱数のシャッフル
 8 NEXTブロックとスコアの表示
 9 ブロックの描画
