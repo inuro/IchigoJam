@@ -1,20 +1,33 @@
 #include <stdint.h>
-int16_t usr_calc(int16_t val, char* mem) {
-    int x_addr = 0x8fa;
-    int x = mem[x_addr];
-    int y = mem[x_addr+1];
-    int c = 224 + x % 8;
-    int flag = 0;
+#define VRAM_OFFSET   0x900
+#define VARS_OFFSET   0x800
+
+uint16_t usr_calc(uint16_t val, uint8_t* mem) {
+    uint8_t* vram_addr = mem + VRAM_OFFSET;
+    uint16_t* vars_addr = mem + VARS_OFFSET;
+    
+    uint16_t* x_addr = mem + 0x8fa;
+    uint16_t* y_addr = mem + 0x8fc; 
+    uint16_t x = *(x_addr);
+    uint16_t y = *(y_addr);
+    uint16_t c = 224 + x % 8;
+    uint16_t flag = 0;
 
     for(int i = 0; i < 2; i++){
-        if (mem[0x900 + x / 8 + y * 32 + i] == 0) {
-            mem[0x900 + x / 8 + y * 32 + i] = c + i * 8;
+        if (*(vram_addr + x / 8 + y * 32 + i) == 0) {
+            *(vram_addr + x / 8 + y * 32 + i) = c + i * 8;
             flag += (0xff<<(8*(1-i))); // if left #ff00 || if right #00ff
         }
     }
     flag = ~flag & (0xff00 >> x % 8); //rev flag
     return flag;
 }
+
+
+uint16_t build_patterns(uint16_t val, uint8_t* mem){
+
+}
+
 
 
 /*
