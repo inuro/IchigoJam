@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7f9af141ea2a129f6a04ad9c987db78ff83cc4df
 #include <stdint.h>
 
 //store patterns on BASIC array( [0]- 
@@ -23,4 +26,7 @@ uint16_t usr_calc(uint16_t val, uint8_t* mem) {
     }
     return block;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7f9af141ea2a129f6a04ad9c987db78ff83cc4df

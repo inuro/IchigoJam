@@ -64,7 +64,11 @@ usr_calc:
 	subs	r6, r7, #1      @R6=R7-1
 	sbcs	r7, r7, r6      @R7=R7-R6 these 2 lines means (R7 != 0)
 	orrs	r4, r7          @R4 |= R7
+<<<<<<< HEAD
 	cmp	r0, #0              @if R0 < 0
+=======
+	cmp	r0, #0              @if R0 <= 0
+>>>>>>> 7f9af141ea2a129f6a04ad9c987db78ff83cc4df
 	blt	.L2                 @   goto .L2
 	strb	r0, [r3]        @Write R0 to vram[R3]
 .L2:

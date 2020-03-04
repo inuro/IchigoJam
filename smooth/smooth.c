@@ -24,11 +24,14 @@ uint16_t usr_calc(uint16_t val, uint8_t* mem) {
 }
 
 
+<<<<<<< HEAD
 uint16_t build_patterns(uint16_t val, uint8_t* mem){
 
 }
 
 
+=======
+>>>>>>> 7f9af141ea2a129f6a04ad9c987db78ff83cc4df
 
 /*
 $ arm-none-eabi-gcc -c -mthumb -mcpu=cortex-m0 -mlittle-endian -mno-unaligned-access -Os -g -o smooth.o -c smooth.c

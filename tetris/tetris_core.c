@@ -13,11 +13,18 @@
 #define VRAM_OFFSET   0x900 //VRAM offset
 #define ARRAY_OFFSET   0x810 //ARRAY offset - save [0]-[7] for working area
 //vals offsets
+<<<<<<< HEAD
 #define VAR_OFFSET 0x8f6
 //#define PATTERN_OFFSET  0x8f6    //Block pattern status = V in BASIC
 //#define ROTATE_OFFSET  0x8f8    //Rotate status = W in BASIC
 //#define X_OFFSET  0x8fa
 //#define Y_OFFSET  0x8fc
+=======
+#define B_OFFSET  0x8ce
+#define R_OFFSET  0x8ee
+#define X_OFFSET  0x8fa
+#define Y_OFFSET  0x8fc
+>>>>>>> 7f9af141ea2a129f6a04ad9c987db78ff83cc4df
 
 //  val:  charactor code to be displayed. 
 //  0:  means clean up
@@ -27,10 +34,17 @@ int16_t usr_calc(int16_t val, uint8_t* mem) {
     uint8_t* vram_addr = mem + VRAM_OFFSET;
     uint16_t* block_addr = mem + ARRAY_OFFSET;
 
+<<<<<<< HEAD
     int b = *(mem + VAR_OFFSET);
     int r = *(mem + VAR_OFFSET + 1);
     int x = *(mem + VAR_OFFSET + 2);
     int y = *(mem + VAR_OFFSET + 3);
+=======
+    int x = *(mem + X_OFFSET);
+    int y = *(mem + Y_OFFSET);
+    int b = *(mem + B_OFFSET);//block_type
+    int r = *(mem + R_OFFSET);//rotation
+>>>>>>> 7f9af141ea2a129f6a04ad9c987db78ff83cc4df
     int block_offset = b * 4 + r;
     int block = *(block_addr + block_offset);
     bool collision = false;   //collision flag
